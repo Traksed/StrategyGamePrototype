@@ -1,0 +1,34 @@
+{
+    "name": "CameraAction",
+    "maps": [
+        {
+            "name": "CameraMap",
+            "id": "2628ea4e-d81d-470b-8bae-db520c697460",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "78bdcbf6-b729-472d-a1ac-345dba1f969c",
+                    "expectedControlType": "Touch",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "7a3eb625-9854-456d-a545-9d7d5164b1ce",
+                    "path": "<Touchscreen>/primaryTouch",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
