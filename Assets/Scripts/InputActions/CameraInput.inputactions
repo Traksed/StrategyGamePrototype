@@ -1,15 +1,33 @@
 {
-    "name": "CameraInput",
+    "name": "CameraAction",
     "maps": [
         {
             "name": "Camera",
-            "id": "1c3468bc-2826-45f8-b061-3c4391bce923",
+            "id": "2628ea4e-d81d-470b-8bae-db520c697460",
             "actions": [
                 {
                     "name": "Move",
                     "type": "PassThrough",
-                    "id": "9d5e398f-0c87-4ddc-a8f7-4a1af7d95067",
+                    "id": "78bdcbf6-b729-472d-a1ac-345dba1f969c",
                     "expectedControlType": "Touch",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "TouchPress",
+                    "type": "Button",
+                    "id": "c504c4ad-9e6e-4066-a5b1-4d8ea376b22a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TouchPosition",
+                    "type": "PassThrough",
+                    "id": "22531a6b-a684-4041-8d35-42f64c2a12eb",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -18,12 +36,34 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "85d01d6b-aba2-4ab8-b7a8-fb900fa36d8b",
+                    "id": "7a3eb625-9854-456d-a545-9d7d5164b1ce",
                     "path": "<Touchscreen>/primaryTouch",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Touchscreen",
+                    "groups": "",
                     "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8547c0a0-7c48-4d07-8752-c103123bc925",
+                    "path": "<Touchscreen>/primaryTouch/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TouchPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0ec8b64f-3eb8-4d84-8ef6-e657f608fc14",
+                    "path": "<Touchscreen>/primaryTouch/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TouchPosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
