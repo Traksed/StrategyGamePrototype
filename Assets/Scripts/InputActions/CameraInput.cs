@@ -29,30 +29,12 @@ public partial class @CameraInput : IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Move"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""78bdcbf6-b729-472d-a1ac-345dba1f969c"",
                     ""expectedControlType"": ""Touch"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""TouchPress"",
-                    ""type"": ""Button"",
-                    ""id"": ""c504c4ad-9e6e-4066-a5b1-4d8ea376b22a"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Press"",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""TouchPosition"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""22531a6b-a684-4041-8d35-42f64c2a12eb"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -62,30 +44,8 @@ public partial class @CameraInput : IInputActionCollection2, IDisposable
                     ""path"": ""<Touchscreen>/primaryTouch"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Touchscreen"",
                     ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8547c0a0-7c48-4d07-8752-c103123bc925"",
-                    ""path"": ""<Touchscreen>/primaryTouch/press"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TouchPress"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0ec8b64f-3eb8-4d84-8ef6-e657f608fc14"",
-                    ""path"": ""<Touchscreen>/primaryTouch/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TouchPosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -109,8 +69,6 @@ public partial class @CameraInput : IInputActionCollection2, IDisposable
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Move = m_Camera.FindAction("Move", throwIfNotFound: true);
-        m_Camera_TouchPress = m_Camera.FindAction("TouchPress", throwIfNotFound: true);
-        m_Camera_TouchPosition = m_Camera.FindAction("TouchPosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -171,15 +129,11 @@ public partial class @CameraInput : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Camera;
     private ICameraActions m_CameraActionsCallbackInterface;
     private readonly InputAction m_Camera_Move;
-    private readonly InputAction m_Camera_TouchPress;
-    private readonly InputAction m_Camera_TouchPosition;
     public struct CameraActions
     {
         private @CameraInput m_Wrapper;
         public CameraActions(@CameraInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Camera_Move;
-        public InputAction @TouchPress => m_Wrapper.m_Camera_TouchPress;
-        public InputAction @TouchPosition => m_Wrapper.m_Camera_TouchPosition;
         public InputActionMap Get() { return m_Wrapper.m_Camera; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -192,12 +146,6 @@ public partial class @CameraInput : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnMove;
-                @TouchPress.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnTouchPress;
-                @TouchPress.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnTouchPress;
-                @TouchPress.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnTouchPress;
-                @TouchPosition.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnTouchPosition;
-                @TouchPosition.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnTouchPosition;
-                @TouchPosition.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnTouchPosition;
             }
             m_Wrapper.m_CameraActionsCallbackInterface = instance;
             if (instance != null)
@@ -205,12 +153,6 @@ public partial class @CameraInput : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
-                @TouchPress.started += instance.OnTouchPress;
-                @TouchPress.performed += instance.OnTouchPress;
-                @TouchPress.canceled += instance.OnTouchPress;
-                @TouchPosition.started += instance.OnTouchPosition;
-                @TouchPosition.performed += instance.OnTouchPosition;
-                @TouchPosition.canceled += instance.OnTouchPosition;
             }
         }
     }
@@ -227,7 +169,5 @@ public partial class @CameraInput : IInputActionCollection2, IDisposable
     public interface ICameraActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnTouchPress(InputAction.CallbackContext context);
-        void OnTouchPosition(InputAction.CallbackContext context);
     }
 }
