@@ -2,28 +2,48 @@
     "name": "CameraInput",
     "maps": [
         {
-            "name": "Camera",
+            "name": "Touch",
             "id": "2628ea4e-d81d-470b-8bae-db520c697460",
             "actions": [
                 {
-                    "name": "Move",
-                    "type": "Value",
+                    "name": "TouchPress",
+                    "type": "Button",
                     "id": "78bdcbf6-b729-472d-a1ac-345dba1f969c",
-                    "expectedControlType": "Touch",
+                    "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "TouchPosition",
+                    "type": "PassThrough",
+                    "id": "14ac31c7-343f-419c-a7fd-c1f3a52880ad",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "7a3eb625-9854-456d-a545-9d7d5164b1ce",
-                    "path": "<Touchscreen>/primaryTouch",
+                    "path": "<Touchscreen>/primaryTouch/press",
                     "interactions": "",
                     "processors": "",
                     "groups": "Touchscreen",
-                    "action": "Move",
+                    "action": "TouchPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f1e58ab7-e9c2-4b58-b440-9a71419aab37",
+                    "path": "<Touchscreen>/primaryTouch/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TouchPosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

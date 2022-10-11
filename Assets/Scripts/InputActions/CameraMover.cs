@@ -25,18 +25,18 @@ namespace InputActions
 
         private void Start()
         {
-            _cameraInput.Camera.Move.started += stx => StartMove(stx);
-            _cameraInput.Camera.Move.canceled += stx => EndMove(stx);
+            _cameraInput.Touch.TouchPress.started += stx => StartMove(stx);
+            _cameraInput.Touch.TouchPress.canceled += stx => EndMove(stx);
         }
 
         private void StartMove(InputAction.CallbackContext context)
         {
-            Debug.Log("Инфа по началу тача: " + _cameraInput.Camera.Move.ReadValue<Vector2>());
+            Debug.Log("Инфа по началу тача: " + _cameraInput.Touch.TouchPosition.ReadValue<Vector2>());
         }
         
         private void EndMove(InputAction.CallbackContext context)
         {
-            
+            Debug.Log("Инфа по концу тача: " + _cameraInput.Touch.TouchPosition.ReadValue<Vector2>());
         }
     }
 }
