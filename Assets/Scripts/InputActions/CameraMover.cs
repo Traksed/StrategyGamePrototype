@@ -1,9 +1,5 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
-using TouchPhase = UnityEngine.TouchPhase;
 
 namespace InputActions
 {
