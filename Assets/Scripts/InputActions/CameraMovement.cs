@@ -18,6 +18,7 @@ public class CameraMovement : MonoBehaviour
         }
 
         _targetPos = target.position;
+        Debug.Log("Hello!");
     }
 
     private void Update()
