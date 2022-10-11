@@ -42,7 +42,7 @@
                     "path": "<Touchscreen>/primaryTouch/position",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Touchscreen",
                     "action": "TouchPosition",
                     "isComposite": false,
                     "isPartOfComposite": false

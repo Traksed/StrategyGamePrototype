@@ -6,10 +6,10 @@ namespace InputActions
     public class CameraMover : MonoBehaviour
     {
         [SerializeField] private float speed = 1;
-        [SerializeField] private float radius = 10;
 
         private CameraInput _cameraInput;
         private Vector2 _currentPosition;
+        private Vector3 _touch;
 
         private void Awake()
         {
@@ -28,24 +28,23 @@ namespace InputActions
 
         private void Start()
         {
-            _cameraInput.Touch.TouchPress.started += StartMove;
-            _cameraInput.Touch.TouchPress.canceled += EndMove;
+            _cameraInput.Touch.TouchPress.started += StartTouch;
+            _cameraInput.Touch.TouchPress.canceled += EndTouch;
 
         }
 
-        private void StartMove(InputAction.CallbackContext context)
+        private void StartTouch(InputAction.CallbackContext context)
         {
             _currentPosition = _cameraInput.Touch.TouchPosition.ReadValue<Vector2>();
-            Debug.Log("Current position: " + _currentPosition);
         }
         
-        private void EndMove(InputAction.CallbackContext context)
+        private void EndTouch(InputAction.CallbackContext context)
         {
             var nextPosition = _cameraInput.Touch.TouchPosition.ReadValue<Vector2>();
-            Vector2 deltaPosition = new Vector2(nextPosition.x - _currentPosition.x, nextPosition.y - _currentPosition.y);
-            Vector3 movePosition = new Vector3(transform.position.x + deltaPosition.x * speed * Time.deltaTime * -1, transform.position.y, 
-                transform.position.z + deltaPosition.y * speed * Time.deltaTime * -1);
-            transform.position = movePosition;
+            Vector2 deltaPosition = _currentPosition - nextPosition;
+             Vector3 movePosition = new Vector3(transform.position.x + deltaPosition.x * speed * Time.deltaTime, transform.position.y, 
+                 transform.position.z + deltaPosition.y * speed * Time.deltaTime);
+             transform.position = movePosition;
         }
     }
 }
