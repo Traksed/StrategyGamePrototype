@@ -1,22 +1,19 @@
-using System;
 using DG.Tweening;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TouchPhase = UnityEditor.DeviceSimulation.TouchPhase;
 
 namespace InputActions
 {
-    public class CameraMover : MonoBehaviour
+    public class CameraTesting : MonoBehaviour
     {
-        [SerializeField] private float speed = 1;
-
+        [SerializeField] private int speed;
+        private Camera _camera;
         private CameraInput _cameraInput;
         private Vector2 _currentPosition;
-        private Vector2 _direction;
-
+        
         private void Awake()
         {
+            _camera = Camera.main;
             _cameraInput = new CameraInput();
         }
 
@@ -32,6 +29,7 @@ namespace InputActions
 
         private void Start()
         {
+            _cameraInput.Touch.Phase.performed += OnMoved;
             _cameraInput.Touch.TouchPress.started += StartTouch;
             _cameraInput.Touch.TouchPress.canceled += EndTouch;
         }
@@ -39,17 +37,21 @@ namespace InputActions
         private void StartTouch(InputAction.CallbackContext context)
         {
             _currentPosition = _cameraInput.Touch.TouchPosition.ReadValue<Vector2>();
-            Debug.Log(context.phase);
-
         }
-        
+
         private void EndTouch(InputAction.CallbackContext context)
+        {
+           
+        }
+
+        private  void OnMoved(InputAction.CallbackContext context)
         {
             var nextPosition = _cameraInput.Touch.TouchPosition.ReadValue<Vector2>();
             Vector2 deltaPosition = _currentPosition - nextPosition;
-            Vector3 movePosition = new Vector3(transform.position.x + deltaPosition.x * speed * Time.deltaTime, transform.position.y, 
-                 transform.position.z + deltaPosition.y * speed *Time.deltaTime);
-             transform.DOMove(movePosition, 0.5f);
+            Vector3 movePosition = new Vector3( deltaPosition.x * speed * Time.deltaTime, 0, 
+                deltaPosition.y * speed * Time.deltaTime);
+            //transform.DOMove(movePosition, 0.1f);
+            _camera.transform.position += movePosition * Time.deltaTime*speed;
         }
     }
 }
