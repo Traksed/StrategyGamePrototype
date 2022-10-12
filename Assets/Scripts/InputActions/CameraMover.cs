@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -44,7 +45,7 @@ namespace InputActions
             Vector2 deltaPosition = _currentPosition - nextPosition;
              Vector3 movePosition = new Vector3(transform.position.x + deltaPosition.x * speed * Time.deltaTime, transform.position.y, 
                  transform.position.z + deltaPosition.y * speed * Time.deltaTime);
-             transform.position = movePosition;
+             transform.DOMove(movePosition, 0.5f);
         }
     }
 }
