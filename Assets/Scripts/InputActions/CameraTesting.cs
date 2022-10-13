@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -27,11 +28,24 @@ namespace InputActions
             _cameraInput.Disable();
         }
 
+        /*private void Update()
+        {
+            if (_cameraInput.Touch.Phase.WasPerformedThisFrame())
+            {
+                var moveVector = _cameraInput.Touch.TouchPosition.ReadValue<Vector2>() * (Time.deltaTime * speed);
+                var direction = new Vector3(moveVector.x, transform.position.y, moveVector.y);
+                Camera.main.transform.position = direction;
+                Debug.Log("Was Performed");
+            }
+            
+            
+        }*/
+
         private void Start()
         {
             _cameraInput.Touch.Phase.performed += OnMoved;
-            _cameraInput.Touch.TouchPress.started += StartTouch;
-            _cameraInput.Touch.TouchPress.canceled += EndTouch;
+            //_cameraInput.Touch.TouchPress.started += StartTouch;
+            //_cameraInput.Touch.TouchPress.canceled += EndTouch;
         }
 
         private void StartTouch(InputAction.CallbackContext context)
@@ -46,12 +60,18 @@ namespace InputActions
 
         private  void OnMoved(InputAction.CallbackContext context)
         {
-            var nextPosition = _cameraInput.Touch.TouchPosition.ReadValue<Vector2>();
-            Vector2 deltaPosition = _currentPosition - nextPosition;
-            Vector3 movePosition = new Vector3( deltaPosition.x * speed * Time.deltaTime, 0, 
-                deltaPosition.y * speed * Time.deltaTime);
-            //transform.DOMove(movePosition, 0.1f);
-            _camera.transform.position += movePosition * Time.deltaTime*speed;
+            // var nextPosition = _cameraInput.Touch.TouchPosition.ReadValue<Vector2>();
+            // Vector2 deltaPosition = _currentPosition - nextPosition;
+            // Vector3 movePosition = new Vector3( deltaPosition.x * Time.deltaTime, 0, 
+            //      deltaPosition.y * Time.deltaTime);
+            // //transform.DOMove(movePosition, 0.1f);
+            //
+            // transform.position += movePosition * Time.deltaTime * speed * -1;
+            
+            var moveVector = _cameraInput.Touch.TouchPosition.ReadValue<Vector2>() * (Time.deltaTime * speed);
+            var direction = new Vector3(moveVector.x, transform.position.y, moveVector.y);
+            if (Camera.main != null) Camera.main.transform.position = direction;
+            Debug.Log("Was Performed");
         }
     }
 }
