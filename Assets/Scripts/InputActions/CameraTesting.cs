@@ -1,21 +1,22 @@
 using System;
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 namespace InputActions
 {
     public class CameraTesting : MonoBehaviour
     {
-        [SerializeField] private int speed;
-        private Camera _camera;
+        [SerializeField] private int speed = 1;
+        
         private CameraInput _cameraInput;
         private Vector2 _currentPosition;
-        
+        private Camera _camera;
+
         private void Awake()
         {
-            _camera = Camera.main;
             _cameraInput = new CameraInput();
+            _camera= Camera.main;
         }
 
         private void OnEnable() 
@@ -28,34 +29,27 @@ namespace InputActions
             _cameraInput.Disable();
         }
 
-        /*private void Update()
-        {
-            if (_cameraInput.Touch.Phase.WasPerformedThisFrame())
-            {
-                var moveVector = _cameraInput.Touch.TouchPosition.ReadValue<Vector2>() * (Time.deltaTime * speed);
-                var direction = new Vector3(moveVector.x, transform.position.y, moveVector.y);
-                Camera.main.transform.position = direction;
-                Debug.Log("Was Performed");
-            }
-            
-            
-        }*/
-
         private void Start()
         {
             _cameraInput.Touch.Phase.performed += OnMoved;
-            //_cameraInput.Touch.TouchPress.started += StartTouch;
-            //_cameraInput.Touch.TouchPress.canceled += EndTouch;
+            _cameraInput.Touch.TouchPress.started += StartTouch;
+            _cameraInput.Touch.TouchPress.canceled += EndTouch;
         }
+
+        private void Update()
+        {
+            
+        }
+
 
         private void StartTouch(InputAction.CallbackContext context)
         {
-            _currentPosition = _cameraInput.Touch.TouchPosition.ReadValue<Vector2>();
+            _currentPosition = _cameraInput.Touch.TouchPosition.ReadValue<Vector2>() ;
         }
 
         private void EndTouch(InputAction.CallbackContext context)
         {
-           
+            
         }
 
         private  void OnMoved(InputAction.CallbackContext context)
@@ -65,13 +59,19 @@ namespace InputActions
             // Vector3 movePosition = new Vector3( deltaPosition.x * Time.deltaTime, 0, 
             //      deltaPosition.y * Time.deltaTime);
             // //transform.DOMove(movePosition, 0.1f);
-            //
-            // transform.position += movePosition * Time.deltaTime * speed * -1;
+            // transform.position += movePosition * Time.deltaTime * speed;
+
+            var moveVector = _cameraInput.Touch.TouchPosition.ReadValue<Vector2>() ;
+            var delta = _currentPosition - moveVector;
+            var direction = new Vector3(
+                delta.x* speed * Time.deltaTime,
+                transform.position.y,
+                delta.y* Time.deltaTime * speed);
             
-            var moveVector = _cameraInput.Touch.TouchPosition.ReadValue<Vector2>() * (Time.deltaTime * speed);
-            var direction = new Vector3(moveVector.x, transform.position.y, moveVector.y);
-            if (Camera.main != null) Camera.main.transform.position = direction;
-            Debug.Log("Was Performed");
+            Debug.Log("Next Position - " + moveVector);
+            Debug.Log("Delta - " + delta);
+            Debug.Log("Direction - " + direction);
+            transform.position = direction;
         }
     }
 }

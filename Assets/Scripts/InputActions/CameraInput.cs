@@ -49,7 +49,7 @@ public partial class @CameraInput : IInputActionCollection2, IDisposable
                     ""name"": ""Phase"",
                     ""type"": ""PassThrough"",
                     ""id"": ""f41265bd-4b0f-4879-9eca-b76bfdfa0dc6"",
-                    ""expectedControlType"": ""Touch"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -81,7 +81,7 @@ public partial class @CameraInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""cc757aec-0b70-4905-bfb8-141641b22b5b"",
-                    ""path"": ""<Touchscreen>/primaryTouch"",
+                    ""path"": ""<Touchscreen>/primaryTouch/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

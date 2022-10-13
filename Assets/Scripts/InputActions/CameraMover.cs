@@ -1,9 +1,6 @@
-using System;
 using DG.Tweening;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TouchPhase = UnityEditor.DeviceSimulation.TouchPhase;
 
 namespace InputActions
 {
@@ -13,7 +10,6 @@ namespace InputActions
 
         private CameraInput _cameraInput;
         private Vector2 _currentPosition;
-        private Vector2 _direction;
 
         private void Awake()
         {
@@ -39,17 +35,15 @@ namespace InputActions
         private void StartTouch(InputAction.CallbackContext context)
         {
             _currentPosition = _cameraInput.Touch.TouchPosition.ReadValue<Vector2>();
-            Debug.Log(context.phase);
-
         }
         
         private void EndTouch(InputAction.CallbackContext context)
         {
-            var nextPosition = _cameraInput.Touch.TouchPosition.ReadValue<Vector2>();
-            Vector2 deltaPosition = _currentPosition - nextPosition;
-            Vector3 movePosition = new Vector3(transform.position.x + deltaPosition.x * speed * Time.deltaTime, transform.position.y, 
-                 transform.position.z + deltaPosition.y * speed *Time.deltaTime);
-             transform.DOMove(movePosition, 0.5f);
+              var nextPosition = _cameraInput.Touch.TouchPosition.ReadValue<Vector2>();
+             Vector2 deltaPosition = _currentPosition - nextPosition;
+             Vector3 movePosition = new Vector3(transform.position.x + deltaPosition.x * speed * Time.deltaTime, transform.position.y, 
+                  transform.position.z + deltaPosition.y * speed *Time.deltaTime);
+            transform.DOMove(movePosition, 1f);
         }
     }
 }
