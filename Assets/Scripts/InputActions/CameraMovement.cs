@@ -39,7 +39,7 @@ public class CameraMovement : MonoBehaviour
                     transform.position = movePos;
                 
                 Debug.Log("Delta - " + _touch.deltaPosition);
-                Debug.Log("Move position - " + movePos);
+                Debug.Log("Position - " + _touch.position);
             }
         }
     }

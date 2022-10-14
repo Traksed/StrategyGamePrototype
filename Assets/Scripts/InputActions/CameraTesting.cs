@@ -67,6 +67,7 @@ namespace InputActions
                 delta.x* speed * Time.deltaTime,
                 transform.position.y,
                 delta.y* Time.deltaTime * speed);
+            Debug.Log("Delta - " + delta);
             transform.position = direction;
         }
     }
