@@ -34,7 +34,7 @@ public partial class @CameraInput : IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)"",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""TouchPosition"",
@@ -43,7 +43,7 @@ public partial class @CameraInput : IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)"",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Phase"",
@@ -52,16 +52,7 @@ public partial class @CameraInput : IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""GetTouch"",
-                    ""type"": ""Button"",
-                    ""id"": ""629a1b04-4db2-4816-b4ae-8c137a049515"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -97,17 +88,6 @@ public partial class @CameraInput : IInputActionCollection2, IDisposable
                     ""action"": ""Phase"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7f6a987f-0421-4f7f-9e05-58fe26ac18cb"",
-                    ""path"": ""<Touchscreen>/Press"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""GetTouch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -131,7 +111,6 @@ public partial class @CameraInput : IInputActionCollection2, IDisposable
         m_Touch_TouchPress = m_Touch.FindAction("TouchPress", throwIfNotFound: true);
         m_Touch_TouchPosition = m_Touch.FindAction("TouchPosition", throwIfNotFound: true);
         m_Touch_Phase = m_Touch.FindAction("Phase", throwIfNotFound: true);
-        m_Touch_GetTouch = m_Touch.FindAction("GetTouch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -194,7 +173,6 @@ public partial class @CameraInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Touch_TouchPress;
     private readonly InputAction m_Touch_TouchPosition;
     private readonly InputAction m_Touch_Phase;
-    private readonly InputAction m_Touch_GetTouch;
     public struct TouchActions
     {
         private @CameraInput m_Wrapper;
@@ -202,7 +180,6 @@ public partial class @CameraInput : IInputActionCollection2, IDisposable
         public InputAction @TouchPress => m_Wrapper.m_Touch_TouchPress;
         public InputAction @TouchPosition => m_Wrapper.m_Touch_TouchPosition;
         public InputAction @Phase => m_Wrapper.m_Touch_Phase;
-        public InputAction @GetTouch => m_Wrapper.m_Touch_GetTouch;
         public InputActionMap Get() { return m_Wrapper.m_Touch; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -221,9 +198,6 @@ public partial class @CameraInput : IInputActionCollection2, IDisposable
                 @Phase.started -= m_Wrapper.m_TouchActionsCallbackInterface.OnPhase;
                 @Phase.performed -= m_Wrapper.m_TouchActionsCallbackInterface.OnPhase;
                 @Phase.canceled -= m_Wrapper.m_TouchActionsCallbackInterface.OnPhase;
-                @GetTouch.started -= m_Wrapper.m_TouchActionsCallbackInterface.OnGetTouch;
-                @GetTouch.performed -= m_Wrapper.m_TouchActionsCallbackInterface.OnGetTouch;
-                @GetTouch.canceled -= m_Wrapper.m_TouchActionsCallbackInterface.OnGetTouch;
             }
             m_Wrapper.m_TouchActionsCallbackInterface = instance;
             if (instance != null)
@@ -237,9 +211,6 @@ public partial class @CameraInput : IInputActionCollection2, IDisposable
                 @Phase.started += instance.OnPhase;
                 @Phase.performed += instance.OnPhase;
                 @Phase.canceled += instance.OnPhase;
-                @GetTouch.started += instance.OnGetTouch;
-                @GetTouch.performed += instance.OnGetTouch;
-                @GetTouch.canceled += instance.OnGetTouch;
             }
         }
     }
@@ -258,6 +229,5 @@ public partial class @CameraInput : IInputActionCollection2, IDisposable
         void OnTouchPress(InputAction.CallbackContext context);
         void OnTouchPosition(InputAction.CallbackContext context);
         void OnPhase(InputAction.CallbackContext context);
-        void OnGetTouch(InputAction.CallbackContext context);
     }
 }

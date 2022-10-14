@@ -1,7 +1,9 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
+using UnityEngine.InputSystem.EnhancedTouch;
+using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
+using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
 namespace InputActions
 {
@@ -11,64 +13,60 @@ namespace InputActions
         
         private CameraInput _cameraInput;
         private Vector2 _currentPosition;
-        private Camera _camera;
+        private Touch _touch;
 
         private void Awake()
         {
             _cameraInput = new CameraInput();
-            _camera= Camera.main;
         }
 
         private void OnEnable() 
         { 
             _cameraInput.Enable(); 
+            EnhancedTouchSupport.Enable();
         }
 
         private void OnDisable() 
         {
             _cameraInput.Disable();
+            EnhancedTouchSupport.Disable();
         }
 
         private void Start()
         {
-            _cameraInput.Touch.Phase.performed += OnMoved;
-            _cameraInput.Touch.TouchPress.started += StartTouch;
-            _cameraInput.Touch.TouchPress.canceled += EndTouch;
+            //Touch.onFingerDown += OnFingerDown;
+            Touch.onFingerMove += OnFingerMove;
+        }
+
+        private void OnFingerDown(Finger finger)
+        {
+            
+        }
+
+        private void OnFingerMove(Finger finger)
+        {
+            if (finger.currentTouch.phase == TouchPhase.Moved)
+            {
+                Vector3 movePosition = new Vector3(
+                    finger.currentTouch.delta.x, 
+                    0, 
+                    finger.currentTouch.delta.y );
+                transform.position += movePosition * speed * Time.deltaTime * -1;
+            }
         }
 
         private void Update()
         {
-            
-        }
-
-
-        private void StartTouch(InputAction.CallbackContext context)
-        {
-            _currentPosition = _cameraInput.Touch.TouchPosition.ReadValue<Vector2>() ;
-        }
-
-        private void EndTouch(InputAction.CallbackContext context)
-        {
-            
-        }
-
-        private  void OnMoved(InputAction.CallbackContext context)
-        {
-            // var nextPosition = _cameraInput.Touch.TouchPosition.ReadValue<Vector2>();
-            // Vector2 deltaPosition = _currentPosition - nextPosition;
-            // Vector3 movePosition = new Vector3( deltaPosition.x * Time.deltaTime, 0, 
-            //      deltaPosition.y * Time.deltaTime);
-            // //transform.DOMove(movePosition, 0.1f);
-            // transform.position += movePosition * Time.deltaTime * speed;
-
-            var moveVector = _cameraInput.Touch.TouchPosition.ReadValue<Vector2>() ;
-            var delta = _currentPosition - moveVector;
-            var direction = new Vector3(
-                delta.x* speed * Time.deltaTime,
-                transform.position.y,
-                delta.y* Time.deltaTime * speed);
-            Debug.Log("Delta - " + delta);
-            transform.position = direction;
+            // if (_touch.valid)
+            // {
+            //     if (_touch.phase == TouchPhase.Moved)
+            //     {
+            //         Vector3 movePosition = new Vector3(transform.position.x + _touch.delta.x * speed * Time.deltaTime,
+            //             transform.position.y,
+            //             transform.position.z + _touch.delta.y * speed * Time.deltaTime);
+            //         transform.position = movePosition;
+            //     }
+            // }
         }
     }
 }

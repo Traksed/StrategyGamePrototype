@@ -1,45 +1,30 @@
 using UnityEngine;
 
-public class CameraMovement : MonoBehaviour
+namespace InputActions
 {
-
-    [SerializeField] private float speed = 1;
-    [SerializeField] private float radius = 10;
-    [SerializeField] private Transform target;
-
-    private Touch _touch;
-    private Vector3 _targetPos;
-
-    private void Start()
+    public class CameraMovement : MonoBehaviour
     {
-        if (target == null)
+
+        [SerializeField] private float speed = 1;
+
+        private Touch _touch;
+        private Vector3 _targetPos;
+
+        private void Update()
         {
-            target = transform;
-        }
-
-        _targetPos = target.position;
-    }
-
-    private void Update()
-    {
-        if (Input.touchCount == 1)
-        {
-            _touch = Input.GetTouch(0);
-
-            if (_touch.phase == TouchPhase.Moved)
+            if (Input.touchCount == 1)
             {
-                Vector3 movePos = new Vector3(
-                    transform.position.x + _touch.deltaPosition.x * speed * -1 * Time.deltaTime,
-                    transform.position.y,
-                    transform.position.z + _touch.deltaPosition.y * speed * -1 * Time.deltaTime);
+                _touch = Input.GetTouch(0);
 
-                Vector3 distance = movePos - _targetPos;
+                if (_touch.phase == TouchPhase.Moved)
+                {
+                    Vector3 movePos = new Vector3(
+                        _touch.deltaPosition.x * speed * -1 * Time.deltaTime,
+                        0,
+                        _touch.deltaPosition.y * speed * -1 * Time.deltaTime);
 
-                if (distance.magnitude < radius)
-                    transform.position = movePos;
-                
-                Debug.Log("Delta - " + _touch.deltaPosition);
-                Debug.Log("Position - " + _touch.position);
+                    transform.position += movePos;
+                }
             }
         }
     }
