@@ -37,6 +37,9 @@ public class CameraMovement : MonoBehaviour
 
                 if (distance.magnitude < radius)
                     transform.position = movePos;
+                
+                Debug.Log("Delta - " + _touch.deltaPosition);
+                Debug.Log("Move position - " + movePos);
             }
         }
     }
