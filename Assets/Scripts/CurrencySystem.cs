@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CurrencySystem : MonoBehaviour
 {
-    private static Dictionary<CurrencyType>, int> CurrencyAmounts = new Dictionary<CurrencyType>, int>();
+    private static Dictionary<CurrencyType, int> CurrencyAmounts = new Dictionary<CurrencyType, int>();
 
     [SerializeField] private List<GameObject> texts;
 

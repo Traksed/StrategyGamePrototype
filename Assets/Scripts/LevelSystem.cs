@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class LevelSystem : MonoBehaviour
 {
     private int _xpNow;
-    private int _level;
+    public int Level;
     private int _xpToNext;
 
     [SerializeField] private GameObject levelPanel;
@@ -35,7 +35,7 @@ public class LevelSystem : MonoBehaviour
             Initialize();
         }
 
-        _xpToNextLevel.TryGetValue(_level, out _xpToNext);
+        _xpToNextLevel.TryGetValue(Level, out _xpToNext);
     }
 
     private static void Initialize()
@@ -105,8 +105,8 @@ public class LevelSystem : MonoBehaviour
 
         if (_xpNow >= _xpToNext)
         {
-            _level++;
-            GameEvent.LevelChangedGameEvent levelChange = new GameEvent.LevelChangedGameEvent(_level);
+            Level++;
+            GameEvent.LevelChangedGameEvent levelChange = new GameEvent.LevelChangedGameEvent(Level);
             EventManager.Instance.QueueEvent(levelChange);
         }
     }
@@ -123,11 +123,11 @@ public class LevelSystem : MonoBehaviour
         window.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(delegate { Destroy(window); });
 
         GameEvent.CurrencyChangeGameEvent currencyInfo =
-            new GameEvent.CurrencyChangeGameEvent(_lvlReward[info.NewLvl[0], CurrencyType.Coins]);
+            new GameEvent.CurrencyChangeGameEvent(_lvlReward[info.NewLvl][0], CurrencyType.Coins);
         EventManager.Instance.QueueEvent(currencyInfo);
         
         currencyInfo =
-            new GameEvent.CurrencyChangeGameEvent(_lvlReward[info.NewLvl[1], CurrencyType.Coins]);
+            new GameEvent.CurrencyChangeGameEvent(_lvlReward[info.NewLvl][1], CurrencyType.Coins);
         EventManager.Instance.QueueEvent(currencyInfo);
     }
 }
