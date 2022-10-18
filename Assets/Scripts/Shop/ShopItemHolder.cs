@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class ShopItemHolder : MonoBehaviour
 {
     private ShopItem _item;
+    //[SerializeField] private LevelSystem _levelSystem;
 
     [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private TextMeshProUGUI descriptionText;
@@ -31,7 +32,7 @@ public class ShopItemHolder : MonoBehaviour
 
     public void UnlockItem()
     {
-        iconImage.gameObject.AddComponent<ShopItemDrag>();
+        iconImage.gameObject.AddComponent<ShopItemDrag>().Initialize(_item);
         iconImage.transform.GetChild(0).gameObject.SetActive(true);
     }
 }

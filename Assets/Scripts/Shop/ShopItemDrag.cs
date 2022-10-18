@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class ShopItemDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
+    private ShopItem _item;
+    
     public static Canvas Canvas;
 
     private RectTransform _rt;
@@ -12,6 +14,11 @@ public class ShopItemDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
 
     private Vector3 _originPos;
     private bool _drag;
+
+    public void Initialize(ShopItem item)
+    {
+        _item = item;
+    }
 
     private void Awake()
     {
@@ -49,6 +56,11 @@ public class ShopItemDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
         Color c = _img.color;
         c.a = 0f;
         _img.color = c;
+
+        Vector3 position = new Vector3(transform.position.x, transform.position.y);
+        position = UnityEngine.Camera.main.ScreenToWorldPoint(position);
+        
+        BuildingSystem.current.InitializeWithObject(_item.Prefab, position);
     }
 
     private void OnEnable()

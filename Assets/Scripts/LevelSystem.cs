@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class LevelSystem : MonoBehaviour
 {
     private int _xpNow;
-    public int Level;
+    private int _level;
     private int _xpToNext;
 
     [SerializeField] private GameObject levelPanel;
@@ -35,7 +35,7 @@ public class LevelSystem : MonoBehaviour
             Initialize();
         }
 
-        _xpToNextLevel.TryGetValue(Level, out _xpToNext);
+        _xpToNextLevel.TryGetValue(_level, out _xpToNext);
     }
 
     private static void Initialize()
@@ -105,8 +105,8 @@ public class LevelSystem : MonoBehaviour
 
         if (_xpNow >= _xpToNext)
         {
-            Level++;
-            GameEvent.LevelChangedGameEvent levelChange = new GameEvent.LevelChangedGameEvent(Level);
+            _level++;
+            GameEvent.LevelChangedGameEvent levelChange = new GameEvent.LevelChangedGameEvent(_level);
             EventManager.Instance.QueueEvent(levelChange);
         }
     }
