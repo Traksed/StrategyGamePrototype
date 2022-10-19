@@ -50,14 +50,17 @@ public class BuildingSystem : MonoBehaviour
 
     #region Building Placement
 
-    public GameObject InitializeWithObject(GameObject building, Vector3 pos)
+    public GameObject InitializeWithObject(GameObject building, Vector3 pos, bool rawPos = false)
     {
-        pos.z = 0;
-        pos.y -= building.GetComponent<SpriteRenderer>().bounds.size.y / 2f;
-        Vector3Int cellPos = gridLayout.WorldToCell(pos);
-        Vector3 position = gridLayout.CellToLocalInterpolated(cellPos);
+        if (!rawPos)
+        {
+            pos.z = 0;
+            pos.y -= building.GetComponent<SpriteRenderer>().bounds.size.y / 2f;
+            Vector3Int cellPos = gridLayout.WorldToCell(pos);
+            pos = gridLayout.CellToLocalInterpolated(cellPos);
+        }
 
-        GameObject obj = Instantiate(building, position, Quaternion.identity);
+        GameObject obj = Instantiate(building, pos, Quaternion.identity);
         PlaceableObject temp = obj.transform.GetComponent<PlaceableObject>();
         temp.gameObject.AddComponent<ObjectDrag>();
 

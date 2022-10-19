@@ -49,9 +49,9 @@ public class Timer : MonoBehaviour
             }
             else
             {
-                TimerFinishedEvent.Invoke();
                 SecodsLeft = 0;
                 IsRunning = false;
+                TimerFinishedEvent.Invoke();
             }
         }
     }

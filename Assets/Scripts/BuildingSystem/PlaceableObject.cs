@@ -1,11 +1,28 @@
+using Unity.Collections;
 using UnityEngine;
 
 public class PlaceableObject : MonoBehaviour
 {
+    private ShopItem _item;
     public bool Placed { get; private set; }
     private Vector3 _origin;
 
     public BoundsInt area;
+
+    [ReadOnly()] public PlaceableObjectData data = new PlaceableObjectData();
+
+    public void Initialize(ShopItem shopItem)
+    {
+        _item = shopItem;
+        data.AssetName = _item.Name;
+        data.ID = SaveData.GenerateId();
+    }
+
+    public void Initialize(ShopItem shopItem, PlaceableObjectData objectData)
+    {
+        _item = shopItem;
+        data = objectData;
+    }
 
     public void Load()
     {
@@ -102,5 +119,11 @@ public class PlaceableObject : MonoBehaviour
         {
             _touching = false;
         }
+    }
+
+    private void OnApplicationQuit()
+    {
+        data.position = transform.position;
+        GameManager.Current.SaveData.AddData(data);
     }
 }

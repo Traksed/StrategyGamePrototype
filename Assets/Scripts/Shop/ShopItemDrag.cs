@@ -60,7 +60,8 @@ public class ShopItemDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
         Vector3 position = new Vector3(transform.position.x, transform.position.y);
         position = UnityEngine.Camera.main.ScreenToWorldPoint(position);
         
-        BuildingSystem.current.InitializeWithObject(_item.Prefab, position);
+        var obj = BuildingSystem.current.InitializeWithObject(_item.Prefab, position);
+        obj.GetComponent<PlaceableObject>().Initialize(_item);
     }
 
     private void OnEnable()
