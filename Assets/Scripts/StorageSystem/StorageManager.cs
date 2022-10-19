@@ -1,9 +1,10 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class StorageManager : MonoBehaviour
 {
+    [SerializeField] private LevelSystem levelSystem;
+    
     public static StorageManager current;
 
     [SerializeField] private GameObject barnPrefab;
@@ -38,7 +39,7 @@ public class StorageManager : MonoBehaviour
 
         for (int i = 0; i < allItems.Length; i++)
         {
-            if (allItems[i].Level >= LevelSystem.Level)
+            if (allItems[i].Level >= levelSystem.Level)
             {
                 //todo remove 2 in a real game
                 itemAmounts.Add(allItems[i], 2);

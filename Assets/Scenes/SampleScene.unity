@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -625,7 +625,7 @@ TilemapRenderer:
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
-  m_SortOrder: 3
+  m_SortOrder: 0
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
@@ -649,7 +649,7 @@ Tilemap:
   m_Origin: {x: 0, y: 0, z: 0}
   m_Size: {x: 67, y: 66, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
-  m_TileOrientation: 0
+  m_TileOrientation: 1
   m_TileOrientationMatrix:
     e00: 1
     e01: 0
@@ -984,10 +984,10 @@ Grid:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 741194009}
   m_Enabled: 1
-  m_CellSize: {x: 2, y: 1, z: 1}
+  m_CellSize: {x: 1, y: 1, z: 1}
   m_CellGap: {x: 0, y: 0, z: 0}
-  m_CellLayout: 2
-  m_CellSwizzle: 0
+  m_CellLayout: 0
+  m_CellSwizzle: 1
 --- !u!4 &741194011
 Transform:
   m_ObjectHideFlags: 0

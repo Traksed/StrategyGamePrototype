@@ -4,8 +4,9 @@ using UnityEngine.UI;
 
 public class ShopItemHolder : MonoBehaviour
 {
+    [SerializeField] private LevelSystem levelSystem;
+    
     private ShopItem _item;
-    private LevelSystem _levelSystem;
 
     [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private TextMeshProUGUI descriptionText;
@@ -17,14 +18,14 @@ public class ShopItemHolder : MonoBehaviour
     public void Initialize(ShopItem item)
     {
         _item = item;
-    
+
         iconImage.sprite = _item.Icon;
         titleText.text = _item.Name;
         descriptionText.text = _item.Description;
         currencyImage.sprite = ShopManager.CurrencySprites[_item.Currency];
         priceText.text = _item.Price.ToString();
 
-        if (_item.Level >= LevelSystem.Level)
+        if (_item.Level >= levelSystem.Level)
         {
             UnlockItem();
         }
