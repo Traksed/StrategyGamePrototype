@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class ShopItemHolder : MonoBehaviour
 {
     private ShopItem _item;
-    //[SerializeField] private LevelSystem _levelSystem;
+    private LevelSystem _levelSystem;
 
     [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private TextMeshProUGUI descriptionText;

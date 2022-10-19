@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -21,15 +22,40 @@ public class CurrencySystem : MonoBehaviour
 
     private void Start()
     {
+        CurrencyAmounts[CurrencyType.Coins] = 100;
+        CurrencyAmounts[CurrencyType.Crystals] = 10;
+        UpdateUI();
+        
         EventManager.Instance.AddListener<GameEvent.CurrencyChangeGameEvent>(OnCurrencyChange);
         EventManager.Instance.AddListener<GameEvent.NotEnoughCurrencyGameEvent>(OnNotEnough);
     }
 
+    private void UpdateUI()
+    {
+        for (int i = 0; i < texts.Count; i++)
+        {
+            currencyTexts[(CurrencyType)i].text = CurrencyAmounts[(CurrencyType)i].ToString();
+        }
+    }
+
     private void OnCurrencyChange(GameEvent.CurrencyChangeGameEvent info)
     {
-        //todo save the currency
+        if (info.Amount < 0)
+        {
+            if (CurrencyAmounts[info.currencyType] < Math.Abs(info.Amount))
+            {
+                EventManager.Instance.QueueEvent(
+                    new GameEvent.NotEnoughCurrencyGameEvent(info.Amount, info.currencyType));
+                return;
+            }
+
+            EventManager.Instance.QueueEvent(new GameEvent.EnoughCurrencyGameEvent());
+        }
+        
         CurrencyAmounts[info.currencyType] += info.Amount;
         currencyTexts[info.currencyType].text = CurrencyAmounts[info.currencyType].ToString();
+        
+        UpdateUI();
     }
 
     private void OnNotEnough(GameEvent.NotEnoughCurrencyGameEvent info)
