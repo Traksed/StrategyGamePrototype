@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlaceableObject : MonoBehaviour
@@ -10,6 +6,12 @@ public class PlaceableObject : MonoBehaviour
     private Vector3 _origin;
 
     public BoundsInt area;
+
+    public void Load()
+    {
+        Destroy(GetComponent<ObjectDrag>());
+        Place();
+    }
 
     public bool CanBePlaced()
     {
