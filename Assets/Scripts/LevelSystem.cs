@@ -42,7 +42,7 @@ public class LevelSystem : MonoBehaviour
     {
         try
         {
-            string path = "levelsXP";
+            string path = "XP";
 
             TextAsset textAsset = Resources.Load<TextAsset>(path);
             string[] lines = textAsset.text.Split('\n');

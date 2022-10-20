@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public SaveData SaveData;
     [SerializeField] private string shopItemsPath = "Shop";
     
-    public GameManager canvas;
+    public GameObject canvas;
 
     private void Awake()
     {
@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    /*public void GetXP(int amount)
+    public void GetXP(int amount)
     {
         GameEvent.XPAddedGameEvent info = new GameEvent.XPAddedGameEvent(amount);
         EventManager.Instance.QueueEvent(info);
@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
         GameEvent.CurrencyChangeGameEvent info = new GameEvent.CurrencyChangeGameEvent(amount, CurrencyType.Coins);
         
         EventManager.Instance.QueueEvent(info);
-    }*/
+    }
 
     private void OnDisable()
     {
