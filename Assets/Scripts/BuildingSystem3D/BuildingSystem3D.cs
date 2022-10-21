@@ -50,9 +50,32 @@ namespace BuildingSystem3D
             position = _grid.GetCellCenterWorld(cellPosition);
             return position;
         }
-        
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                InitializeWithObject(prefab1);
+            }
+            else if(Input.GetKeyDown(KeyCode.B))
+            {
+                InitializeWithObject(prefab2);
+            }
+        }
 
         #endregion
-        
+
+        #region BuildingPlacement
+
+        public void InitializeWithObject(GameObject prefab)
+        {
+            Vector3 position = SnapCoordinateToGrid(Vector3.zero);
+
+            GameObject obj = Instantiate(prefab, position, Quaternion.identity);
+            _objectToPlace = obj.GetComponent<PlaceableObject>();
+            obj.AddComponent<ObjectDrag>();
+        }
+
+        #endregion
     }
 }
