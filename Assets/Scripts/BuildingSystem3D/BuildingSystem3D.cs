@@ -1,10 +1,6 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace BuildingSystem3D
-{
     public class  BuildingSystem3D: MonoBehaviour
     {
         public static BuildingSystem3D Current;
@@ -14,7 +10,7 @@ namespace BuildingSystem3D
         public GameObject prefab2;
 
         private Grid _grid;
-        private PlaceableObject _objectToPlace;
+        private PlaceableObject3D _objectToPlace;
 
         [SerializeField] private Tilemap mainTilemap;
         [SerializeField] private TileBase baseTile;
@@ -72,10 +68,9 @@ namespace BuildingSystem3D
             Vector3 position = SnapCoordinateToGrid(Vector3.zero);
 
             GameObject obj = Instantiate(prefab, position, Quaternion.identity);
-            _objectToPlace = obj.GetComponent<PlaceableObject>();
-            obj.AddComponent<ObjectDrag>();
+            _objectToPlace = obj.GetComponent<PlaceableObject3D>();
+            obj.AddComponent<ObjectDrag3D>();
         }
 
         #endregion
-    }
 }

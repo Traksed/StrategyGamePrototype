@@ -1,8 +1,5 @@
-using System;
 using UnityEngine;
 
-namespace BuildingSystem3D
-{
     public class ObjectDrag3D : MonoBehaviour
     {
         private Vector3 _offset;
@@ -17,5 +14,4 @@ namespace BuildingSystem3D
             Vector3 position = BuildingSystem3D.GetMouseWorldPosition() + _offset;
             transform.position = BuildingSystem3D.Current.SnapCoordinateToGrid(position);
         }
-    }
 }
