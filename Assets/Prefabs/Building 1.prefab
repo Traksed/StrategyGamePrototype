@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1470451522014997811}
   - component: {fileID: 3650888767582848241}
+  - component: {fileID: 8288957452295399147}
   m_Layer: 0
   m_Name: Building 1
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1027997261628675463}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4736033872258860137}
@@ -46,6 +47,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6551269, y: 0.36442983, z: 0.7063855}
   m_Center: {x: 0.00037910044, y: 0.16678542, z: 0.033996224}
+--- !u!114 &8288957452295399147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027997261628675463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91a0f08d0db0fbd4d89b50150b54f386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5242874016368151427
 GameObject:
   m_ObjectHideFlags: 0
