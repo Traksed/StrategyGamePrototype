@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+namespace BuildingSystem3D
+{
     public class  BuildingSystem3D: MonoBehaviour
     {
         public static BuildingSystem3D Current;
@@ -73,4 +75,5 @@ using UnityEngine.Tilemaps;
         }
 
         #endregion
+    }
 }
