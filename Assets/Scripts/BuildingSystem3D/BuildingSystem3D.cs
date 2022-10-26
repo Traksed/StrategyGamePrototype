@@ -24,6 +24,41 @@ namespace BuildingSystem3D
             Current = this;
             _grid = gridLayout.gameObject.GetComponent<Grid>();
         }
+        
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                InitializeWithObject(prefab1);
+            }
+            else if(Input.GetKeyDown(KeyCode.B))
+            {
+                InitializeWithObject(prefab2);
+            }
+
+            if (!_objectToPlace)
+            {
+                return;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                _objectToPlace.Rotate();
+            }
+            else if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (CanBePlaced(_objectToPlace))
+                {
+                    _objectToPlace.Place();
+                    Vector3Int start = gridLayout.WorldToCell(_objectToPlace.GetStartPosition());
+                    TakeArea(start, _objectToPlace.Size);
+                }
+                else
+                {
+                    Destroy(_objectToPlace.gameObject);
+                }
+            }
+        }
 
         #endregion
 
@@ -49,17 +84,22 @@ namespace BuildingSystem3D
             return position;
         }
 
-        private void Update()
+        private static TileBase[] GetTilesBlock(BoundsInt area, Tilemap tilemap)
         {
-            if (Input.GetKeyDown(KeyCode.A))
+            TileBase[] array = new TileBase[area.size.x * area.size.y * area.size.z];
+            int counter = 0;
+            
+            foreach (var vector in area.allPositionsWithin)
             {
-                InitializeWithObject(prefab1);
+                Vector3Int position = new Vector3Int(vector.x, vector.y, vector.z);
+                array[counter] = tilemap.GetTile(position);
+                counter++;
             }
-            else if(Input.GetKeyDown(KeyCode.B))
-            {
-                InitializeWithObject(prefab2);
-            }
+
+            return array;
         }
+
+       
 
         #endregion
 
@@ -72,6 +112,31 @@ namespace BuildingSystem3D
             GameObject obj = Instantiate(prefab, position, Quaternion.identity);
             _objectToPlace = obj.GetComponent<PlaceableObject3D>();
             obj.AddComponent<ObjectDrag3D>();
+        }
+
+        private bool CanBePlaced(PlaceableObject3D placeableObject3D)
+        {
+            BoundsInt area = new BoundsInt();
+            area.position = gridLayout.WorldToCell(_objectToPlace.GetStartPosition());
+            area.size = placeableObject3D.Size;
+
+            TileBase[] baseArray = GetTilesBlock(area, mainTilemap);
+
+            foreach (var tileBase in baseArray)
+            {
+                if (tileBase == baseTile)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public void TakeArea(Vector3Int start, Vector3Int size)
+        {
+            mainTilemap.BoxFill(start, baseTile, start.x, start.y, 
+                            start.x+size.x, start.y + size.y);
         }
 
         #endregion

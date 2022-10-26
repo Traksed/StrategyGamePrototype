@@ -6,7 +6,7 @@ namespace BuildingSystem3D
     public class PlaceableObject3D : MonoBehaviour
     {
         public bool Placed { get; private set; }
-        public Vector3 Size { get; private set; }
+        public Vector3Int Size { get; private set; }
 
         private Vector3[] _vertices;
 
@@ -31,12 +31,12 @@ namespace BuildingSystem3D
                 _vertices[i] = BuildingSystem3D.Current.gridLayout.WorldToCell(worldPos);
             }
 
-            Size = new Vector3(Mathf.Abs((vertices[0] - vertices[1]).x),
+            Size = new Vector3Int(Mathf.Abs((vertices[0] - vertices[1]).x),
                                 Mathf.Abs((vertices[0] - vertices[3]).y), 
                                 1);
         }
 
-        private Vector3 GetStartPosition()
+        public Vector3 GetStartPosition()
         {
             return transform.TransformPoint(_vertices[0]);
         }
@@ -45,6 +45,20 @@ namespace BuildingSystem3D
         {
             GetColliderVertexPositionLocal();
             CalculatedSizeInCells();
+        }
+
+        public void Rotate()
+        {
+            transform.Rotate(new Vector3(0,90,0));
+            Size = new Vector3Int(Size.y, Size.x, 1);
+
+            Vector3[] vertices = new Vector3[_vertices.Length];
+            for (int i = 0; i < vertices.Length; i++)
+            {
+                vertices[i] = _vertices[(i + 1) % _vertices.Length];
+            }
+
+            _vertices = vertices;
         }
 
         public virtual void Place()
