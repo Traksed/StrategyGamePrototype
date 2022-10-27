@@ -70,7 +70,6 @@ namespace BuildingSystem3D
         {
             //work
             Ray ray = UnityEngine.Camera.main.ScreenPointToRay(Input.mousePosition);
-            
             if (Physics.Raycast(ray, out RaycastHit raycastHit))
             {
                 return raycastHit.point;
@@ -93,7 +92,6 @@ namespace BuildingSystem3D
         {
             TileBase[] array = new TileBase[area.size.x * area.size.y * area.size.z];
             int counter = 0;
-            
             foreach (var vector in area.allPositionsWithin)
             {
                 Vector3Int position = new Vector3Int(vector.x, vector.y, vector.z);
