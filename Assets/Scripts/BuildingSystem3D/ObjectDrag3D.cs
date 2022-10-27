@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace BuildingSystem3D
 {
+    //work
     public class ObjectDrag3D : MonoBehaviour
     {
         private Vector3 _offset;

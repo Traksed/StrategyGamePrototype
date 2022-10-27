@@ -43,6 +43,7 @@ namespace BuildingSystem3D
 
             if (Input.GetKeyDown(KeyCode.Return))
             {
+                //work
                 _objectToPlace.Rotate();
             }
             else if (Input.GetKeyDown(KeyCode.Space))
@@ -62,11 +63,14 @@ namespace BuildingSystem3D
 
         #endregion
 
-        #region Unils
+        #region Utils
 
+       
         public static Vector3 GetMouseWorldPosition()
         {
+            //work
             Ray ray = UnityEngine.Camera.main.ScreenPointToRay(Input.mousePosition);
+            
             if (Physics.Raycast(ray, out RaycastHit raycastHit))
             {
                 return raycastHit.point;
@@ -79,6 +83,7 @@ namespace BuildingSystem3D
 
         public Vector3 SnapCoordinateToGrid(Vector3 position)
         {
+            //work
             Vector3Int cellPosition = gridLayout.WorldToCell(position);
             position = _grid.GetCellCenterWorld(cellPosition);
             return position;
@@ -107,6 +112,7 @@ namespace BuildingSystem3D
 
         public void InitializeWithObject(GameObject prefab)
         {
+            //work
             Vector3 position = SnapCoordinateToGrid(Vector3.zero);
 
             GameObject obj = Instantiate(prefab, position, Quaternion.identity);
@@ -118,7 +124,8 @@ namespace BuildingSystem3D
         {
             BoundsInt area = new BoundsInt();
             area.position = gridLayout.WorldToCell(_objectToPlace.GetStartPosition());
-            area.size = placeableObject3D.Size;
+            area.size = new Vector3Int(area.size.x + 1, area.size.y + 1, area.size.z);
+            //area.size = placeableObject3D.Size;
 
             TileBase[] baseArray = GetTilesBlock(area, mainTilemap);
 
@@ -136,7 +143,7 @@ namespace BuildingSystem3D
         public void TakeArea(Vector3Int start, Vector3Int size)
         {
             mainTilemap.BoxFill(start, baseTile, start.x, start.y, 
-                            start.x+size.x, start.y + size.y);
+                            start.x + size.x, start.y + size.y);
         }
 
         #endregion
