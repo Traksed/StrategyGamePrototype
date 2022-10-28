@@ -8,6 +8,7 @@ namespace BuildingSystem3D
         public static BuildingSystem3D Current;
         
         public GridLayout gridLayout;
+        [SerializeField] private GameObject[] buildings;
         public GameObject prefab1;
         public GameObject prefab2;
 
@@ -27,13 +28,25 @@ namespace BuildingSystem3D
         
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.Q))
             {
-                InitializeWithObject(prefab1);
+                InitializeWithObject(buildings[0]);
             }
-            else if(Input.GetKeyDown(KeyCode.B))
+            else if(Input.GetKeyDown(KeyCode.W))
             {
-                InitializeWithObject(prefab2);
+                InitializeWithObject(buildings[1]);
+            }
+            else if(Input.GetKeyDown(KeyCode.E))
+            {
+                InitializeWithObject(buildings[2]);
+            }
+            else if(Input.GetKeyDown(KeyCode.R))
+            {
+                InitializeWithObject(buildings[3]);
+            }
+            else if(Input.GetKeyDown(KeyCode.T))
+            {
+                InitializeWithObject(buildings[4]);
             }
 
             if (!_objectToPlace)
