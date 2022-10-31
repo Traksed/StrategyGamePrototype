@@ -37,7 +37,7 @@ public class UnitClick : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
             {
-                GroundMarker.transform.position = hit.point;
+                GroundMarker.transform.position = hit.point + Vector3.up;
                 GroundMarker.SetActive(false);
                 GroundMarker.SetActive(true);
             }
