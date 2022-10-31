@@ -8,15 +8,18 @@ namespace BuildingSystem3D
     {
         private Vector3 _offset;
         private CameraMover _cameraMover;
+        private UnitDrag _unitDrag;
 
         private void Awake()
         {
             _cameraMover = UnityEngine.Camera.main.GetComponent<CameraMover>();
+            _unitDrag = (UnitDrag)FindObjectOfType(typeof(UnitDrag));
         }
 
         private void OnMouseDown()
         {
             _cameraMover.enabled = false;
+            _unitDrag.enabled = false;
             _offset = transform.position - global::BuildingSystem3D.BuildingSystem3D.GetMouseWorldPosition();
         }
 
@@ -29,6 +32,7 @@ namespace BuildingSystem3D
         private void OnMouseUp()
         {
             _cameraMover.enabled = true;
+            _unitDrag.enabled = true;
         }
     }
 }

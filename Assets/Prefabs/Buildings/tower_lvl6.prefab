@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 95241112934879724}
   - component: {fileID: 6796158519895316626}
   - component: {fileID: 5470816485072584423}
+  - component: {fileID: 1057820983712096719}
+  - component: {fileID: 6208960303678173730}
   m_Layer: 0
   m_Name: tower_lvl6
   m_TagString: Untagged
@@ -131,3 +133,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91a0f08d0db0fbd4d89b50150b54f386, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &1057820983712096719
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576699208671400}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!208 &6208960303678173730
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576699208671400}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.05, y: 0.381, z: 0.05}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.381, z: 0}
+  m_TimeToStationary: 0.5
