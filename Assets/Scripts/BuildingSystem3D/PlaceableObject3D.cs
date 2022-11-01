@@ -24,10 +24,10 @@ namespace BuildingSystem3D
         private void CalculatedSizeInCells()
         {
             Vector3Int[] vertices = new Vector3Int[_vertices.Length];
-            for (int i = 0; i < _vertices.Length; i++)
+            for (int i = 0; i < vertices.Length; i++)
             {
                 Vector3 worldPos = transform.TransformPoint(_vertices[i]);
-                _vertices[i] = BuildingSystem3D.Current.gridLayout.WorldToCell(worldPos);
+                vertices[i] = BuildingSystem3D.Current.gridLayout.WorldToCell(worldPos);
             }
 
             Size = new Vector3Int(Mathf.Abs((vertices[0] - vertices[1]).x),
