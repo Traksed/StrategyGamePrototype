@@ -12,7 +12,7 @@ namespace BuildingSystem3D
 
         private void Awake()
         {
-            _cameraMover = UnityEngine.Camera.main.GetComponent<CameraMover>();
+            if (UnityEngine.Camera.main != null) _cameraMover = UnityEngine.Camera.main.GetComponent<CameraMover>();
             _unitDrag = (UnitDrag)FindObjectOfType(typeof(UnitDrag));
         }
 
@@ -20,13 +20,13 @@ namespace BuildingSystem3D
         {
             _cameraMover.enabled = false;
             _unitDrag.enabled = false;
-            _offset = transform.position - global::BuildingSystem3D.BuildingSystem3D.GetMouseWorldPosition();
+            _offset = transform.position - BuildingSystem3D.GetMouseWorldPosition();
         }
 
         private void OnMouseDrag()
         {
-            Vector3 position = global::BuildingSystem3D.BuildingSystem3D.GetMouseWorldPosition() + _offset;
-            transform.position = global::BuildingSystem3D.BuildingSystem3D.Current.SnapCoordinateToGrid(position);
+            Vector3 position = BuildingSystem3D.GetMouseWorldPosition() + _offset;
+            transform.position = BuildingSystem3D.Current.SnapCoordinateToGrid(position);
         }
 
         private void OnMouseUp()

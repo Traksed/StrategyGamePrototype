@@ -1,28 +1,30 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class UnitMovement : MonoBehaviour
+namespace UnitSystem
 {
-    private UnityEngine.Camera _myCam;
-    private NavMeshAgent _myAgent;
-    public LayerMask groud;
-
-    private void Start()
+    public class UnitMovement : MonoBehaviour
     {
-        _myCam = UnityEngine.Camera.main;
-        _myAgent = GetComponent<NavMeshAgent>();
-    }
+        private UnityEngine.Camera _myCam;
+        private NavMeshAgent _myAgent;
+        public LayerMask ground;
 
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(1))
+        private void Start()
         {
-            RaycastHit hit;
-            Ray ray = _myCam.ScreenPointToRay(Input.mousePosition);
+            _myCam = UnityEngine.Camera.main;
+            _myAgent = GetComponent<NavMeshAgent>();
+        }
 
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, groud))
+        private void Update()
+        {
+            if (Input.GetMouseButtonDown(1))
             {
-                _myAgent.SetDestination(hit.point);
+                Ray ray = _myCam.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(ray, out var hit, Mathf.Infinity, ground))
+                {
+                    _myAgent.SetDestination(hit.point);
+                }
             }
         }
     }

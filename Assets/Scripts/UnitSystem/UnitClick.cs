@@ -19,10 +19,9 @@ namespace UnitSystem
         {
             if (Input.GetMouseButtonDown(0))
             {
-                RaycastHit hit;
                 Ray ray = _myCamera.ScreenPointToRay(Input.mousePosition);
 
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity, clickable))
+                if (Physics.Raycast(ray, out var hit, Mathf.Infinity, clickable))
                 {
                     UnitSelections.Instance.ClickSelect(hit.collider.gameObject);
                 }
@@ -34,10 +33,9 @@ namespace UnitSystem
 
             if (Input.GetMouseButtonDown(1))
             {
-                RaycastHit hit;
                 Ray ray = _myCamera.ScreenPointToRay(Input.mousePosition);
 
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
+                if (Physics.Raycast(ray, out var hit, Mathf.Infinity, ground))
                 {
                     groundMarker.transform.position = hit.point + Vector3.up;
                     groundMarker.SetActive(false);

@@ -1,60 +1,54 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitSelections : MonoBehaviour
+namespace UnitSystem
 {
-    public List<GameObject> unitList = new List<GameObject>();
-    public List<GameObject> unitsSelected = new List<GameObject>();
-
-    private static UnitSelections _instance;
-    public static UnitSelections Instance
+    public class UnitSelections : MonoBehaviour
     {
-        get { return _instance; }
-    }
+        public List<GameObject> unitList = new List<GameObject>();
+        public List<GameObject> unitsSelected = new List<GameObject>();
 
-    private void Awake()
-    {
-        if (_instance != null && _instance != this)
+        private static UnitSelections _instance;
+        public static UnitSelections Instance => _instance;
+
+        private void Awake()
         {
-            Destroy(this.gameObject);
+            if (_instance != null && _instance != this)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                _instance = this;
+            }
         }
-        else
-        {
-            _instance = this;
-        }
-    }
 
-    public void ClickSelect(GameObject unitToAdd)
-    {
-        DeselectAll();
-        unitsSelected.Add(unitToAdd);
-        unitToAdd.transform.GetChild(0).gameObject.SetActive(true);
-        unitToAdd.GetComponent<UnitMovement>().enabled = true;
-    }
-
-    public void DragSelect(GameObject unitToAdd)
-    {
-        if (!unitsSelected.Contains(unitToAdd))
+        public void ClickSelect(GameObject unitToAdd)
         {
+            DeselectAll();
             unitsSelected.Add(unitToAdd);
             unitToAdd.transform.GetChild(0).gameObject.SetActive(true);
             unitToAdd.GetComponent<UnitMovement>().enabled = true;
         }
-    }
 
-    public void DeselectAll()
-    {
-
-        foreach (var unit in unitsSelected)
+        public void DragSelect(GameObject unitToAdd)
         {
-            unit.GetComponent<UnitMovement>().enabled = false;
-            unit.transform.GetChild(0).gameObject.SetActive(false);
+            if (!unitsSelected.Contains(unitToAdd))
+            {
+                unitsSelected.Add(unitToAdd);
+                unitToAdd.transform.GetChild(0).gameObject.SetActive(true);
+                unitToAdd.GetComponent<UnitMovement>().enabled = true;
+            }
         }
-        unitsSelected.Clear();
-    }
 
-    public void Deselect(GameObject unitToDeselect)
-    {
-        
+        public void DeselectAll()
+        {
+            foreach (var unit in unitsSelected)
+            {
+                unit.GetComponent<UnitMovement>().enabled = false;
+                unit.transform.GetChild(0).gameObject.SetActive(false);
+            }
+            unitsSelected.Clear();
+        }
     }
 }

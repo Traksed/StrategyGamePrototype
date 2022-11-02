@@ -61,7 +61,7 @@ namespace BuildingSystem3D
             }
             else if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (CanBePlaced(_objectToPlace))
+                if (CanBePlaced())
                 {
                     _objectToPlace.Place();
                     Vector3Int start = gridLayout.WorldToCell(_objectToPlace.GetStartPosition());
@@ -82,15 +82,16 @@ namespace BuildingSystem3D
         public static Vector3 GetMouseWorldPosition()
         {
             //work
-            Ray ray = UnityEngine.Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit raycastHit))
+            if (UnityEngine.Camera.main != null)
             {
-                return raycastHit.point;
+                Ray ray = UnityEngine.Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out RaycastHit raycastHit))
+                {
+                    return raycastHit.point;
+                }
             }
-            else
-            {
-                return Vector3.zero;
-            }
+
+            return Vector3.zero;
         }
 
         public Vector3 SnapCoordinateToGrid(Vector3 position)
@@ -131,12 +132,11 @@ namespace BuildingSystem3D
             obj.AddComponent<ObjectDrag3D>();
         }
 
-        private bool CanBePlaced(PlaceableObject3D placeableObject3D)
+        private bool CanBePlaced()
         {
             BoundsInt area = new BoundsInt();
             area.position = gridLayout.WorldToCell(_objectToPlace.GetStartPosition());
             area.size = new Vector3Int(area.size.x + 1, area.size.y + 1, area.size.z);
-            //area.size = placeableObject3D.Size;
 
             TileBase[] baseArray = GetTilesBlock(area, mainTilemap);
 

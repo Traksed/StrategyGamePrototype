@@ -4,7 +4,6 @@ namespace BuildingSystem3D
 {
     public class PlaceableObject3D : MonoBehaviour
     {
-        public bool Placed { get; private set; }
         public Vector3Int Size { get; private set; }
 
         private Vector3[] _vertices;
@@ -65,8 +64,6 @@ namespace BuildingSystem3D
             ObjectDrag3D drag3D = gameObject.GetComponent<ObjectDrag3D>();
             Destroy(drag3D);
 
-            Placed = true;
-            
             //invoke events on placement
         }
     }
