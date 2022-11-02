@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9022579608a1d4347bf3aeb803a9f2d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groud:
+  ground:
     serializedVersion: 2
     m_Bits: 64
 --- !u!54 &-4251506118099735728
