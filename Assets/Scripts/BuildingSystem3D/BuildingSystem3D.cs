@@ -126,7 +126,6 @@ namespace BuildingSystem3D
         {
             //work
             Vector3 position = SnapCoordinateToGrid(Vector3.zero);
-
             GameObject obj = Instantiate(prefab, position, Quaternion.identity);
             _objectToPlace = obj.GetComponent<PlaceableObject3D>();
             obj.AddComponent<ObjectDrag3D>();

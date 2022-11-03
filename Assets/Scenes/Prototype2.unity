@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -450,7 +450,7 @@ MonoBehaviour:
   buildings:
   - {fileID: 1517170868221472, guid: 2c121b1857a760c4f9ef7b0e4b09864c, type: 3}
   - {fileID: 1270087151159818, guid: 9836dcd00a6903040804e82bf876375f, type: 3}
-  - {fileID: 1829272864192424, guid: e3fdc4200313b5e43973175595f50a82, type: 3}
+  - {fileID: 451453435800832819, guid: 6c433998218cb2b44a4dd9abd55358b4, type: 3}
   - {fileID: 1319839184525736, guid: 4be703f0d1af24046be6c443f26fdb76, type: 3}
   - {fileID: 1576699208671400, guid: 1904a53e1a45ff64781a85c6743cb94f, type: 3}
   prefab1: {fileID: 1027997261628675463, guid: 4897c557ca1cdbd428642a913667a426, type: 3}
