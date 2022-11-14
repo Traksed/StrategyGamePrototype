@@ -8,11 +8,18 @@ namespace UnitSystem
         private UnityEngine.Camera _myCam;
         private NavMeshAgent _myAgent;
         public LayerMask ground;
+        private Base _base;
+
+        private void Awake()
+        {
+            _base = FindObjectOfType<Base>();
+        }
 
         private void Start()
         {
             _myCam = UnityEngine.Camera.main;
             _myAgent = GetComponent<NavMeshAgent>();
+            _myAgent.SetDestination(_base.transform.position);
         }
 
         private void Update()
@@ -27,5 +34,7 @@ namespace UnitSystem
                 }
             }
         }
+        
+        
     }
 }

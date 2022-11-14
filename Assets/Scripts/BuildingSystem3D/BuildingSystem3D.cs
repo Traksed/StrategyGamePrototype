@@ -116,8 +116,6 @@ namespace BuildingSystem3D
             return array;
         }
 
-       
-
         #endregion
 
         #region BuildingPlacement
