@@ -468,9 +468,9 @@ GameObject:
   - component: {fileID: 506234378}
   - component: {fileID: 506234377}
   m_Layer: 0
-  m_Name: UnitSpawner
+  m_Name: EnemySpawnPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -608,9 +608,9 @@ GameObject:
   - component: {fileID: 745244213}
   - component: {fileID: 745244214}
   m_Layer: 0
-  m_Name: UnitSpawner
+  m_Name: EnemySpawnPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -803,9 +803,9 @@ GameObject:
   - component: {fileID: 979151029}
   - component: {fileID: 979151030}
   m_Layer: 0
-  m_Name: UnitSpawner
+  m_Name: EnemySpawnPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -894,9 +894,9 @@ GameObject:
   - component: {fileID: 1123141965}
   - component: {fileID: 1123141966}
   m_Layer: 0
-  m_Name: UnitSpawner
+  m_Name: EnemySpawnPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1204,6 +1204,7 @@ GameObject:
   - component: {fileID: 1565222401}
   - component: {fileID: 1565222400}
   - component: {fileID: 1565222399}
+  - component: {fileID: 1565222404}
   m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
@@ -1308,6 +1309,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1565222404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565222398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d804312728a3404181b7472dcb870e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Waves:
+  - Name: Wave1
+    Enemy: {fileID: 2987987502122882484, guid: c4b2088886b5c954884edaf2bd7eb2f5, type: 3}
+    Count: 20
+    Rate: 10
+  - Name: Wave2
+    Enemy: {fileID: 2987987502122882484, guid: c4b2088886b5c954884edaf2bd7eb2f5, type: 3}
+    Count: 15
+    Rate: 1
+  SpawnPoints:
+  - {fileID: 506234378}
+  - {fileID: 745244213}
+  - {fileID: 979151029}
+  - {fileID: 1123141965}
+  TimeBetweenWaves: 3
 --- !u!1 &1641465113
 GameObject:
   m_ObjectHideFlags: 0
@@ -2911,7 +2939,7 @@ GameObject:
   m_Layer: 6
   m_Name: Base
   m_TagString: Untagged
-  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

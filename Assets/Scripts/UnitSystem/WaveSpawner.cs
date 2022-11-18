@@ -22,7 +22,7 @@ public class WaveSpawner : MonoBehaviour
     }
 
     public Wave[] Waves;
-    private int _nextWave = 0;
+    private int _nextWave;
 
     public Transform[] SpawnPoints;
     
@@ -102,15 +102,15 @@ public class WaveSpawner : MonoBehaviour
         return true;
     }
 
-    IEnumerator SpawnWave(Wave _wave)
+    IEnumerator SpawnWave(Wave wave)
     {
-        Debug.Log("Spawning Wave: " + _wave.Name);
+        Debug.Log("Spawning Wave: " + wave.Name);
         _state = SpawnState.Spawning;
 
-        for (int i = 0; i < _wave.Count; i++)
+        for (int i = 0; i < wave.Count; i++)
         {
-            SpawnEnemy(_wave.Enemy);
-            yield return new WaitForSeconds(1f / _wave.Rate);
+            SpawnEnemy(wave.Enemy);
+            yield return new WaitForSeconds(1f / wave.Rate);
         }
         
         _state = SpawnState.Waiting;
@@ -118,11 +118,11 @@ public class WaveSpawner : MonoBehaviour
         yield break;
     }
 
-    void SpawnEnemy(Transform _enemy)
+    void SpawnEnemy(Transform enemy)
     {
-        Debug.Log("Spawning Enemy: " + _enemy.name);
+        Debug.Log("Spawning Enemy: " + enemy.name);
 
         Transform sp = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
-        Instantiate(_enemy, sp.position, sp.rotation);
+        Instantiate(enemy, sp.position, sp.rotation);
     }
 }

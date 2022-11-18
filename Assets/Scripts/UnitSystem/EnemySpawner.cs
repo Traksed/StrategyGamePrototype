@@ -1,18 +1,17 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private Waves[] _waves;
+    [SerializeField] private Waves[] waves;
     private int _currentEnemyIndex;
     private int _currentWaveIndex;
     private int _enemiesLeftToSpawn;
 
     private void Start()
     {
-        _enemiesLeftToSpawn = _waves[0].WaveSettings.Length;
+        _enemiesLeftToSpawn = waves[0].WaveSettings.Length;
         LaunchWave();
     }
 
@@ -20,9 +19,9 @@ public class EnemySpawner : MonoBehaviour
     {
         if (_enemiesLeftToSpawn > 0)
         {
-            yield return new WaitForSeconds(_waves[_currentWaveIndex].WaveSettings[_currentEnemyIndex].SpawnDelay);
-            Instantiate(_waves[_currentWaveIndex].WaveSettings[_currentEnemyIndex].Enemy,
-                _waves[_currentWaveIndex].WaveSettings[_currentEnemyIndex].NeededSpawner.transform.position,
+            yield return new WaitForSeconds(waves[_currentWaveIndex].WaveSettings[_currentEnemyIndex].SpawnDelay);
+            Instantiate(waves[_currentWaveIndex].WaveSettings[_currentEnemyIndex].Enemy,
+                waves[_currentWaveIndex].WaveSettings[_currentEnemyIndex].NeededSpawner.transform.position,
                 Quaternion.identity);
             _enemiesLeftToSpawn--;
             _currentEnemyIndex++;
@@ -30,10 +29,10 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
-            if (_currentWaveIndex < _waves.Length - 1)
+            if (_currentWaveIndex < waves.Length - 1)
             {
                 _currentWaveIndex++;
-                _enemiesLeftToSpawn = _waves[_currentWaveIndex].WaveSettings.Length;
+                _enemiesLeftToSpawn = waves[_currentWaveIndex].WaveSettings.Length;
                 _currentEnemyIndex = 0;
             }
         }
@@ -48,17 +47,17 @@ public class EnemySpawner : MonoBehaviour
 [Serializable]
 public class Waves
 {
-    [SerializeField] private WaveSettings[] _waveSettings;
-    public WaveSettings[] WaveSettings { get => _waveSettings;}
+    [SerializeField] private WaveSettings[] waveSettings;
+    public WaveSettings[] WaveSettings => waveSettings;
 }
 
 [Serializable]
-public class WaveSettings
-{
-    [SerializeField] private GameObject _enemy;
-    public GameObject Enemy { get => _enemy; }
-    [SerializeField] private GameObject _neededSpawner;
-    public GameObject NeededSpawner { get => _neededSpawner; }
-    [SerializeField] private float _spawnDelay;
-    public float SpawnDelay { get => _spawnDelay; }
-}
+ public class WaveSettings
+ {
+     [SerializeField] private GameObject enemy;
+     public GameObject Enemy => enemy;
+     [SerializeField] private GameObject neededSpawner;
+     public GameObject NeededSpawner => neededSpawner;
+     [SerializeField] private float spawnDelay;
+     public float SpawnDelay => spawnDelay;
+ }
